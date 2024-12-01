@@ -4,31 +4,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
 
 @Entity
 public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Getter
+    private String aggregateId;
+    @Getter
     private String type; // like MoneyDepositedEvent
+    @Getter
     private String payload; // .json format
 
     public EventEntity() {}
 
-    public EventEntity(String type, String payload) {
+    public EventEntity(String aggregateId, String type, String payload) {
+        this.aggregateId = aggregateId;
         this.type = type;
         this.payload = payload;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getPayload() {
-        return payload;
     }
 }

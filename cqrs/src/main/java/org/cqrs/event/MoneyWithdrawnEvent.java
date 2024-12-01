@@ -1,19 +1,14 @@
 package org.cqrs.event;
 
-public class MoneyWithdrawnEvent implements Event {
-    private final String accountId;
+import lombok.Getter;
+
+@Getter
+public class MoneyWithdrawnEvent extends AggregateEvent {
     private final double amount;
 
-    public MoneyWithdrawnEvent(String accountId, double amount) {
-        this.accountId = accountId;
+    public MoneyWithdrawnEvent(String aggregateId, double amount) {
+        super(aggregateId);
         this.amount = amount;
     }
 
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
 }

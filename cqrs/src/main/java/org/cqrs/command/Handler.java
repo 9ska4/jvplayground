@@ -33,20 +33,20 @@ public class Handler {
         return event;
     }
 
-    public double calculateBalance(String accountId) {
+    public double calculateBalance(String aggregateId) {
         return store.getEvents()
                 .stream()
                 .filter(event -> event instanceof MoneyDepositedEvent || event instanceof MoneyWithdrawnEvent)
-                .filter(event -> doesEventMatchAccount(event, accountId))
+                .filter(event -> doesEventMatchAccount(event, aggregateId))
                 .mapToDouble(this::getAmountWithSign)
                 .sum();
     }
 
-    private boolean doesEventMatchAccount(Event event, String accountId) {
+    private boolean doesEventMatchAccount(Event event, String aggregateId) {
         if (event instanceof MoneyDepositedEvent depositedEvent) {
-            return depositedEvent.getAccountId().equals(accountId);
+            return depositedEvent.getAggregateId().equals(aggregateId);
         } else if (event instanceof MoneyWithdrawnEvent withdrawnEvent) {
-            return withdrawnEvent.getAccountId().equals(accountId);
+            return withdrawnEvent.getAggregateId().equals(aggregateId);
         }
         return false;
     }

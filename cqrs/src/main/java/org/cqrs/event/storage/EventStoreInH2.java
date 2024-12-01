@@ -1,6 +1,7 @@
 package org.cqrs.event.storage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.cqrs.event.AggregateEvent;
 import org.cqrs.event.Event;
 import org.cqrs.event.EventStore;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,10 @@ public class EventStoreInH2 implements EventStore {
     }
 
     @Override
-    public void saveEvent(Event event) {
+    public void saveEvent(AggregateEvent event) {
         try {
             String payload = objectMapper.writeValueAsString(event);
-            repository.save(new EventEntity(event.getClass().getSimpleName(), payload));
+            repository.save(new EventEntity(event.getAggregateId(), event.getClass().getSimpleName(), payload));
         } catch (Exception e) {
             throw new RuntimeException("Failed to save event", e);
         }
@@ -40,5 +41,10 @@ public class EventStoreInH2 implements EventStore {
                     }
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Event> getEventsByAggregateId(String aggregateId) {
+        return List.of();
     }
 }
