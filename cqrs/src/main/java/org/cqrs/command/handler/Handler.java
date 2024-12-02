@@ -1,5 +1,7 @@
-package org.cqrs.command;
+package org.cqrs.command.handler;
 
+import org.cqrs.command.DepositMoneyCommand;
+import org.cqrs.command.WithdrawMoneyCommand;
 import org.cqrs.event.storage.EventStoreInMemory;
 import org.cqrs.event.Event;
 import org.cqrs.event.MoneyDepositedEvent;

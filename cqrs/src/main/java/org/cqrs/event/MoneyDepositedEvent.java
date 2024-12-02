@@ -1,10 +1,13 @@
 package org.cqrs.event;
 
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MoneyDepositedEvent extends AggregateEvent {
-    private final double amount;
+    private double amount;
 
     public MoneyDepositedEvent(String aggregateId, double amount) {
         super(aggregateId);

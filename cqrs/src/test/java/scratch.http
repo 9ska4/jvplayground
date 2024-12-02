@@ -1,0 +1,43 @@
+### GET request to example server
+GET http://localhost:8080/api/events
+
+###
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "aggregateId": "1001",
+  "amount": 100,
+  "type": "MoneyDepositedEvent"
+}
+
+### accounts - create
+POST http://localhost:8080/api/accounts
+Content-Type: application/json
+
+{
+  "accountId": "9102",
+  "owner": "Tom"
+}
+
+### accounts - deposit
+POST http://localhost:8080/api/accounts/deposit
+Content-Type: application/json
+
+{
+  "accountId": "9102",
+  "amount": 100
+}
+
+### accounts - withdraw
+POST http://localhost:8080/api/accounts/withdraw
+Content-Type: application/json
+
+{
+  "accountId": "9102",
+  "amount": 1000
+}
+
+### accounts - balance 
+@id = 9102
+GET http://localhost:8080/api/accounts/{{id}}/balance

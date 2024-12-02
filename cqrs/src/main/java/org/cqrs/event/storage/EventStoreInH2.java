@@ -32,19 +32,23 @@ public class EventStoreInH2 implements EventStore {
     @Override
     public List<Event> getEvents() {
         return repository.findAll().stream()
-                .map(entity -> {
-                    try {
-                        Class<?> eventType = Class.forName("org.cqrs.command." + entity.getType());
-                        return (Event) objectMapper.readValue(entity.getPayload(), eventType);
-                    } catch (Exception e) {
-                        throw new RuntimeException("Failed to load event", e);
-                    }
-                })
+                .map(this::tryToCast)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Event> getEventsByAggregateId(String aggregateId) {
-        return List.of();
+        return repository.findByAggregateId(aggregateId).stream()
+                .map(this::tryToCast)
+                .collect(Collectors.toList());
+    }
+
+    private Event tryToCast(EventEntity entity) {
+        try {
+            Class<?> eventType = Class.forName("org.cqrs.event." + entity.getType());
+            return (Event) objectMapper.readValue(entity.getPayload(), eventType);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load event", e);
+        }
     }
 }
