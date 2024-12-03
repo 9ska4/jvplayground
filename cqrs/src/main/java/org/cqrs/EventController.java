@@ -2,19 +2,17 @@ package org.cqrs;
 
 import lombok.AllArgsConstructor;
 import org.cqrs.event.*;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/events")
+@AllArgsConstructor
+@Deprecated
 public class EventController {
 
     private final EventStore eventStore;
-
-    public EventController(@Qualifier("eventStoreInH2") EventStore eventStore) {
-        this.eventStore = eventStore;
-    }
 
     @GetMapping
     public List<Event> getAllEvents() {
@@ -39,6 +37,6 @@ public class EventController {
             default -> throw new IllegalArgumentException("Unsupported event type: " + eventDto.type());
         };
     }
+    record EventDto (String type, String aggregateId, double amount) {}
 }
 
-record EventDto (String type, String aggregateId, double amount) {}

@@ -7,6 +7,7 @@ import org.cqrs.event.Event;
 import org.cqrs.event.MoneyDepositedEvent;
 import org.cqrs.event.MoneyWithdrawnEvent;
 
+@Deprecated
 public class Handler {
     private final EventStoreInMemory store;
 

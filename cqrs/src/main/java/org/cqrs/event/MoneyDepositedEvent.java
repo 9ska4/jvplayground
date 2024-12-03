@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MoneyDepositedEvent extends AggregateEvent {
+public class MoneyDepositedEvent extends DatedEvent {
     private double amount;
 
     public MoneyDepositedEvent(String aggregateId, double amount) {

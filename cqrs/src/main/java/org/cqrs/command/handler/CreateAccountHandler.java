@@ -12,7 +12,6 @@ public class CreateAccountHandler implements CommandHandler<CreateAccountCommand
 
     private final EventStore eventStore;
 
-
     @Override
     public void handle(CreateAccountCommand command) {
         if (!eventStore.getEventsByAggregateId(command.getAccountId()).isEmpty()) {

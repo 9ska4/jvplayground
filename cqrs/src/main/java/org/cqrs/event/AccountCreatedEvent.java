@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor // for jackson
 @AllArgsConstructor
-public class AccountCreatedEvent extends AggregateEvent {
+public class AccountCreatedEvent extends DatedEvent {
     private String owner;
 
     public AccountCreatedEvent(String aggregateId, String owner) {

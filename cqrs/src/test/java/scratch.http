@@ -1,15 +1,4 @@
-### GET request to example server
-GET http://localhost:8080/api/events
-
-###
-POST http://localhost:8080/api/events
-Content-Type: application/json
-
-{
-  "aggregateId": "1001",
-  "amount": 100,
-  "type": "MoneyDepositedEvent"
-}
+### Accounts management examples
 
 ### accounts - create
 POST http://localhost:8080/api/accounts
@@ -26,7 +15,7 @@ Content-Type: application/json
 
 {
   "accountId": "9102",
-  "amount": 100
+  "amount": 200
 }
 
 ### accounts - withdraw
@@ -35,9 +24,12 @@ Content-Type: application/json
 
 {
   "accountId": "9102",
-  "amount": 1000
+  "amount": 100
 }
 
-### accounts - balance 
-@id = 9102
-GET http://localhost:8080/api/accounts/{{id}}/balance
+### accounts - balance
+GET http://localhost:8080/api/accounts/9102/balance
+
+
+### accounts - transactions
+GET http://localhost:8080/api/accounts/9102/transactions

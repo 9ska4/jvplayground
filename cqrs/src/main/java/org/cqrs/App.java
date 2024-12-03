@@ -9,6 +9,7 @@ import org.cqrs.event.storage.EventStoreInMemory;
  * Hello world!
  *
  */
+@Deprecated
 public class App 
 {
     public static void main(String[] args) {

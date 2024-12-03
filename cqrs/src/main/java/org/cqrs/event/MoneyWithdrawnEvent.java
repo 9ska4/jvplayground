@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MoneyWithdrawnEvent extends AggregateEvent {
+public class MoneyWithdrawnEvent extends DatedEvent {
     private double amount;
 
     public MoneyWithdrawnEvent(String aggregateId, double amount) {
